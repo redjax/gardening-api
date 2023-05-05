@@ -14,24 +14,10 @@ jobs:
     # if: ${{ github.event.label.name == 'release' }}
 
     steps:
-      ## Checkout repo in runner
-      # - name: Checkout repo
-      #   uses: actions/checkout@v2
-      #   with:
-      #     ref: release
-
-      ## Use PDM in actions
-      # - name: Install PDM
-      #   uses: pdm-project/setup-pdm@v3
-      #   with:
-      #     python-version: 3.10
-      #     cache: true
-
-      ## Install dependencies
-      - name: Install CI dependencies
-        run: |
-          pip install -r requirements.ci.txt
-
-      ## Run Ruff with --fix
-      - name: Format with Ruff
-        run: ruff check . --fix
+      ## Checkout repo
+      - uses: actions/checkout@v3
+      ## Run Ruff
+      - uses: chartboost/ruff-action@v1
+        with:
+          src: "."
+          args: --fix
