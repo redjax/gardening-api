@@ -15,10 +15,10 @@ jobs:
 
     steps:
       ## Checkout repo in runner
-      - name: Checkout repo
-        uses: actions/checkout@v2
-        with:
-          ref: release
+      # - name: Checkout repo
+      #   uses: actions/checkout@v2
+      #   with:
+      #     ref: release
 
       ## Use PDM in actions
       - name: Install ruff
