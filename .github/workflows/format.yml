@@ -3,7 +3,7 @@ name: Format code with Ruff
 on:
   pull_request:
     branches:
-      - rc
+      - ci
     # types:
     # - labeled
 
