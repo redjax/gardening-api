@@ -1,0 +1,17 @@
+kind: pipeline
+type: docker
+name: Format with Ruff
+
+steps:
+  - name: Format with Ruff
+    image: pyton:3.10-slim
+    commands:
+      ## Install CI requirements
+      - pipx install -r requirements.ci.txt
+      ## Run Ruff through PDM
+      - pdm run format
+    when:
+      branch:
+        include: rc
+      event:
+        - pull request

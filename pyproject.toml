@@ -1,0 +1,33 @@
+[tool.pdm]
+
+[tool.pdm.dev-dependencies]
+dev = ["ruff>=0.0.264", "black>=23.3.0", "pytest>=7.3.1"]
+[project]
+name = ""
+version = ""
+description = ""
+authors = [{ name = "redjax", email = "none@none.com" }]
+dependencies = [
+    "requests-cache>=1.0.1",
+    "pydantic[dotenv]>=1.10.7",
+    "sqlalchemy>=2.0.12",
+    "stackprinter>=0.2.10",
+    "httpx>=0.24.0",
+    "arrow>=1.2.3",
+    "msgpack>=1.0.5",
+    "trio>=0.22.0",
+]
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+[tool.pdm.scripts]
+check = { cmd = "ruff check ." }
+format = { cmd = "ruff check . --fix" }
+
+export = { cmd = "pdm export --prod -o requirements.txt --without-hashes" }
+export-dev = { cmd = "pdm export -d -o requirements.dev.txt --without-hashes" }
+## Uncomment if/when using a CI group
+# export-ci = { cmd = "pdm export -G ci -o requirements.ci.txt --without-hashes" }
+
+start = { shell = "cd trefle_plant_api && python main.py" }
+# benchmark-requests = { shell = "cd app && python compare_sync_async.py" }

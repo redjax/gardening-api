@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "..",
+			"name": "git_root"
+		},
+		{
+			"path": "../trefle_plant_api"
+		}
+	],
+	"launch": {
+		"version": "0.2.0",
+		"configurations": []
+	}
+}
