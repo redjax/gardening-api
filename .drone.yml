@@ -12,6 +12,6 @@ steps:
       - pdm run format
     when:
       branch:
-        include: rc
+        include: ci
       event:
         - pull request
