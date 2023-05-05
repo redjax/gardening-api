@@ -10,8 +10,6 @@ print(f"Settings: {app_settings}")
 
 from util.validators import valid_req_libs
 
-count = 1000
-
 
 if __name__ == "__main__":
     ...
