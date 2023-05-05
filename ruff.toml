@@ -25,6 +25,7 @@ ignore = [
     "D203",  ## one-blank-line-before-class
     "D213",  ## multi-line-summary-second-line
     "E501",  ## Line too long
+    "E402"  ## Module level import not at top of file
 ]
 
 ## Allow autofix for all enabled rules (when "--fix") is provided.
