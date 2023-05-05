@@ -20,6 +20,11 @@ dependencies = [
 requires-python = ">=3.10"
 license = { text = "MIT" }
 
+[project.optional-dependencies]
+ci = [
+    "ruff>=0.0.264",
+    "pytest>=7.3.1",
+]
 [tool.pdm.scripts]
 check = { cmd = "ruff check ." }
 format = { cmd = "ruff check . --fix" }
@@ -27,7 +32,7 @@ format = { cmd = "ruff check . --fix" }
 export = { cmd = "pdm export --prod -o requirements.txt --without-hashes" }
 export-dev = { cmd = "pdm export -d -o requirements.dev.txt --without-hashes" }
 ## Uncomment if/when using a CI group
-# export-ci = { cmd = "pdm export -G ci -o requirements.ci.txt --without-hashes" }
+export-ci = { cmd = "pdm export -G ci -o requirements.ci.txt --without-hashes" }
 
 start = { shell = "cd trefle_plant_api && python main.py" }
 # benchmark-requests = { shell = "cd app && python compare_sync_async.py" }
