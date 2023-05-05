@@ -354,8 +354,8 @@ summary = "HTTP library with thread-safe connection pooling, file post, and more
 
 [metadata]
 lock_version = "4.2"
-groups = ["default", "dev"]
-content_hash = "sha256:6e97739c48f31c11731664617422e464920a252c954c35974417b2892cee2134"
+groups = ["default", "ci", "dev"]
+content_hash = "sha256:dabf0a6deb6e9261238a62d1733e513c25adc2bfcf9bc474c6e05c631488d0dc"
 
 [metadata.files]
 "anyio 3.6.2" = [
