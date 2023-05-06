@@ -11,5 +11,11 @@
 	"launch": {
 		"version": "0.2.0",
 		"configurations": []
+	},
+	"settings": {
+		"[python]": {
+			"editor.defaultFormatter": "ms-python.black-formatter"
+		},
+		"python.formatting.provider": "none"
 	}
 }
