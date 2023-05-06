@@ -9,6 +9,19 @@ THIS_DIR = Path(__file__).parent
 allowed_log_levels = ["DEBUG", "CRITICAL", "WARNING", "ERROR", "INFO"]
 
 
+class APISettingsBase(BaseSettings):
+    BASE_URL: str = None
+    API_KEY: str = None
+
+
+class TrefleAPISettings(APISettingsBase):
+    BASE_URL: str = Field(default=None, env="BASE_URL")
+    API_KEY: str = Field(default=None, env="API_KEY")
+
+    class Config:
+        env_file = f"{THIS_DIR}/env_files/.env"
+
+
 # class PokeApiSettings(BaseSettings):
 #     BASE_URL: str = Field(default=None, env="BASE_URL")
 
@@ -16,15 +29,15 @@ allowed_log_levels = ["DEBUG", "CRITICAL", "WARNING", "ERROR", "INFO"]
 #         env_file = f"{THIS_DIR}/env_files/.env"
 
 
-class AppSettings(BaseSettings):
-    APP_TITLE: str = Field(default="Default App Title", env="APP_TITLE")
-    APP_DESCRIPTION: str = Field(
-        default="Default app description", env="APP_DESCRIPTION"
-    )
-    APP_VERSION: str = Field(default="0.0.1", env="APP_VERSION")
+# class AppSettings(BaseSettings):
+#     APP_TITLE: str = Field(default="Default App Title", env="APP_TITLE")
+#     APP_DESCRIPTION: str = Field(
+#         default="Default app description", env="APP_DESCRIPTION"
+#     )
+#     APP_VERSION: str = Field(default="0.0.1", env="APP_VERSION")
 
-    class Config:
-        env_file = f"{THIS_DIR}/env_files/.env"
+#     class Config:
+#         env_file = f"{THIS_DIR}/env_files/.env"
 
 
 class LoggingSetting(BaseSettings):
@@ -47,5 +60,6 @@ class LoggingSetting(BaseSettings):
 
 
 # api_settings = PokeApiSettings()
-app_settings = AppSettings()
+trefle_api_settings = TrefleAPISettings()
+# app_settings = AppSettings()
 logging_settings = LoggingSetting()
