@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+import stackprinter
+
+stackprinter.set_excepthook(style="darkbg2")
+
 from typing import Any, Optional, Union
 from core.config import trefle_api_settings, logging_settings
 from core.logging.logger import get_logger
@@ -11,6 +15,10 @@ from util.constants import (
     all_genus_endpoint,
     all_species_endpoint,
     token_str,
+    base_params,
+    plants_url,
+    genus_url,
+    build_url,
 )
 
 import trio
@@ -23,34 +31,19 @@ print(f"Settings: {trefle_api_settings}")
 from util.validators import valid_req_libs
 
 
-async def build_url(
-    base: str = trefle_base_url,
-    endpoint: str = None,
-):
-    log.debug(f"Base: {base}, endpoint: {endpoint}")
-
-    if endpoint:
-        if endpoint.startswith("/"):
-            endpoint = endpoint.strip("/")
-
-    if base:
-        if base.endswith("/"):
-            base = base.strip("/")
-
-    return_url = f"{base}/{endpoint}"
-
-    return return_url
-
-
 async def make_req(url: str = None, params: dict[str, Any] = None) -> dict[str, Any]:
     # log.debug(f"Requesting URL {url}")
-    async with httpx.AsyncClient() as client:
-        res = await client.get(url=url, params=params)
+    async with httpx.AsyncClient(params=params) as client:
+        # res = await client.get(url=url)
+        request = client.build_request("GET", url)
+        res = await client.send(request)
 
     return res.json()
 
 
 async def multirequest_plants(req_list: list = None):
+    ## Don't set params in this httpx AsyncClient.
+    #  The params change in the for loop
     async with httpx.AsyncClient() as client:
         plant_res = []
 
@@ -69,24 +62,39 @@ async def multirequest_plants(req_list: list = None):
 
 
 async def main():
-    base_params = {"token": token_str}
-
-    genus_url = await build_url(base=trefle_base_url, endpoint=all_genus_endpoint)
-    plants_url = await build_url(base=trefle_base_url, endpoint=all_plants_endpoint)
-
     async with trio.open_nursery() as nursery:
         log.debug(f"Genus URL: {genus_url}")
         log.debug(f"Plants URL: {plants_url}")
 
         with benchmark("Request All Genus"):
-            all_genus = await make_req(genus_url, params=base_params)
-        with benchmark("Request All Plants"):
-            all_plants = await make_req(plants_url, params=base_params)
+            try:
+                all_genus = await make_req(genus_url, params=base_params)
+            except trio.Cancelled as exc:
+                log.error(
+                    {
+                        "exception": "trio.Cancelled",
+                        "details": {"msg": exc},
+                        "extra": {"url": genus_url},
+                    }
+                )
 
-        # log.debug(f"All Genus ({type(all_genus)}):\n{all_genus}")
-        # log.debug(f"All Plants ({type(all_plants)}):\n{all_plants}")
+        with benchmark("Request All Plants"):
+            try:
+                all_plants = await make_req(plants_url, params=base_params)
+            except trio.Cancelled as exc:
+                log.error(
+                    {
+                        "exception": "trio.Cancelled",
+                        "details": {"msg": exc},
+                        "extra": {"url": plants_url},
+                    }
+                )
+
+        log.debug(f"All Genus ({type(all_genus)}):\n{all_genus}")
+        log.debug(f"All Plants ({type(all_plants)}):\n{all_plants}")
 
         plant_search_base_url = f"{plants_url}/search"
+        log.debug(f"Plant search base URL: {plant_search_base_url}")
         plants_to_search = []
 
         log.debug(f"Looping over [{len(all_plants['data'])}] plants.")

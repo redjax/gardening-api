@@ -2,6 +2,12 @@
 # It is not intended for manual editing.
 
 [[package]]
+name = "aiorwlock"
+version = "1.3.0"
+requires_python = ">=3.7.0"
+summary = "Read write lock for asyncio."
+
+[[package]]
 name = "anyio"
 version = "3.6.2"
 requires_python = ">=3.6.2"
@@ -21,6 +27,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "asks"
+version = "3.0.0"
+requires_python = ">= 3.6.2"
+summary = "asks - async http"
+dependencies = [
+    "anyio~=3.0",
+    "async-generator",
+    "h11",
+]
+
+[[package]]
 name = "async-generator"
 version = "1.10"
 requires_python = ">=3.5"
@@ -28,8 +45,8 @@ summary = "Async generators and context managers for Python 3.5+"
 
 [[package]]
 name = "attrs"
-version = "23.1.0"
-requires_python = ">=3.7"
+version = "22.2.0"
+requires_python = ">=3.6"
 summary = "Classes Without Boilerplate"
 
 [[package]]
@@ -98,6 +115,12 @@ requires_python = ">=3.7"
 summary = "Backport of PEP 654 (exception groups)"
 
 [[package]]
+name = "fasteners"
+version = "0.17.3"
+requires_python = ">=3.6"
+summary = "A python package that provides useful locks"
+
+[[package]]
 name = "greenlet"
 version = "2.0.2"
 requires_python = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*"
@@ -131,6 +154,20 @@ dependencies = [
     "httpcore<0.18.0,>=0.15.0",
     "idna",
     "sniffio",
+]
+
+[[package]]
+name = "httpx-cache"
+version = "0.9.0"
+requires_python = ">=3.7"
+summary = "Simple caching transport for httpx."
+dependencies = [
+    "aiorwlock~=1.2",
+    "anyio~=3.0",
+    "attrs<23.0,>=21.4",
+    "fasteners<0.18.0,>=0.16.3",
+    "httpx~=0.23",
+    "msgpack~=1.0",
 ]
 
 [[package]]
@@ -355,9 +392,13 @@ summary = "HTTP library with thread-safe connection pooling, file post, and more
 [metadata]
 lock_version = "4.2"
 groups = ["default", "ci", "dev"]
-content_hash = "sha256:dabf0a6deb6e9261238a62d1733e513c25adc2bfcf9bc474c6e05c631488d0dc"
+content_hash = "sha256:22d60b889243ae8f8ab6fa175c254ecec1074fd99509800d50d825e6f89d4e74"
 
 [metadata.files]
+"aiorwlock 1.3.0" = [
+    {url = "https://files.pythonhosted.org/packages/04/c0/f0082a7d21fc5cdaeac1433348412e7e8da79197852ed0fec67277a3e768/aiorwlock-1.3.0-py3-none-any.whl", hash = "sha256:45baf8e4fa9a23e0bb325fbd67da80de1fd7ae1d4f59a6381754c60cec7b289b"},
+    {url = "https://files.pythonhosted.org/packages/77/fe/7027595f5e635ac1f597f7160a420e1f642a474576efb697001efea16bdc/aiorwlock-1.3.0.tar.gz", hash = "sha256:83f12d87df4b9728a0b8fda1756585ab0d652b107bab59c6084e1b1ad692ab45"},
+]
 "anyio 3.6.2" = [
     {url = "https://files.pythonhosted.org/packages/77/2b/b4c0b7a3f3d61adb1a1e0b78f90a94e2b6162a043880704b7437ef297cad/anyio-3.6.2-py3-none-any.whl", hash = "sha256:fbbe32bd270d2a2ef3ed1c5d45041250284e31fc0a4df4a5a6071842051a51e3"},
     {url = "https://files.pythonhosted.org/packages/8b/94/6928d4345f2bc1beecbff03325cad43d320717f51ab74ab5a571324f4f5a/anyio-3.6.2.tar.gz", hash = "sha256:25ea0d673ae30af41a0c442f81cf3b38c7e79fdc7b60335a4c14e05eb0947421"},
@@ -366,13 +407,16 @@ content_hash = "sha256:dabf0a6deb6e9261238a62d1733e513c25adc2bfcf9bc474c6e05c631
     {url = "https://files.pythonhosted.org/packages/67/67/4bca5a595e2f89bff271724ddb1098e6c9e16f7f3d018d120255e3c30313/arrow-1.2.3-py3-none-any.whl", hash = "sha256:5a49ab92e3b7b71d96cd6bfcc4df14efefc9dfa96ea19045815914a6ab6b1fe2"},
     {url = "https://files.pythonhosted.org/packages/7f/c0/c601ea7811f422700ef809f167683899cdfddec5aa3f83597edf97349962/arrow-1.2.3.tar.gz", hash = "sha256:3934b30ca1b9f292376d9db15b19446088d12ec58629bc3f0da28fd55fb633a1"},
 ]
+"asks 3.0.0" = [
+    {url = "https://files.pythonhosted.org/packages/02/2e/3e30369ff442f82b28bbb07f12d252433aab9ecac74ff93751aac343d1b7/asks-3.0.0.tar.gz", hash = "sha256:e4d61dc8362594c81cfe0198eee9f3a208eef1c0023355d711566a6dcf65e986"},
+]
 "async-generator 1.10" = [
     {url = "https://files.pythonhosted.org/packages/71/52/39d20e03abd0ac9159c162ec24b93fbcaa111e8400308f2465432495ca2b/async_generator-1.10-py3-none-any.whl", hash = "sha256:01c7bf666359b4967d2cda0000cc2e4af16a0ae098cbffcb8472fb9e8ad6585b"},
     {url = "https://files.pythonhosted.org/packages/ce/b6/6fa6b3b598a03cba5e80f829e0dadbb49d7645f523d209b2fb7ea0bbb02a/async_generator-1.10.tar.gz", hash = "sha256:6ebb3d106c12920aaae42ccb6f787ef5eefdcdd166ea3d628fa8476abe712144"},
 ]
-"attrs 23.1.0" = [
-    {url = "https://files.pythonhosted.org/packages/97/90/81f95d5f705be17872843536b1868f351805acf6971251ff07c1b8334dbb/attrs-23.1.0.tar.gz", hash = "sha256:6279836d581513a26f1bf235f9acd333bc9115683f14f7e8fae46c98fc50e015"},
-    {url = "https://files.pythonhosted.org/packages/f0/eb/fcb708c7bf5056045e9e98f62b93bd7467eb718b0202e7698eb11d66416c/attrs-23.1.0-py3-none-any.whl", hash = "sha256:1f28b4522cdc2fb4256ac1a020c78acf9cba2c6b461ccd2c126f3aa8e8335d04"},
+"attrs 22.2.0" = [
+    {url = "https://files.pythonhosted.org/packages/21/31/3f468da74c7de4fcf9b25591e682856389b3400b4b62f201e65f15ea3e07/attrs-22.2.0.tar.gz", hash = "sha256:c9227bfc2f01993c03f68db37d1d15c9690188323c067c641f1a35ca58185f99"},
+    {url = "https://files.pythonhosted.org/packages/fb/6e/6f83bf616d2becdf333a1640f1d463fef3150e2e926b7010cb0f81c95e88/attrs-22.2.0-py3-none-any.whl", hash = "sha256:29e95c7f6778868dbd49170f98f8818f78f3dc5e0e37c0b1f474e3561b240836"},
 ]
 "black 23.3.0" = [
     {url = "https://files.pythonhosted.org/packages/06/1e/273d610249f0335afb1ddb03664a03223f4826e3d1a95170a0142cb19fb4/black-23.3.0-cp39-cp39-win_amd64.whl", hash = "sha256:6b39abdfb402002b8a7d030ccc85cf5afff64ee90fa4c5aebc531e3ad0175ddb"},
@@ -564,6 +608,10 @@ content_hash = "sha256:dabf0a6deb6e9261238a62d1733e513c25adc2bfcf9bc474c6e05c631
     {url = "https://files.pythonhosted.org/packages/61/97/17ed81b7a8d24d8f69b62c0db37abbd8c0042d4b3fc429c73dab986e7483/exceptiongroup-1.1.1-py3-none-any.whl", hash = "sha256:232c37c63e4f682982c8b6459f33a8981039e5fb8756b2074364e5055c498c9e"},
     {url = "https://files.pythonhosted.org/packages/cc/38/57f14ddc8e8baeddd8993a36fe57ce7b4ba174c35048b9a6d270bb01e833/exceptiongroup-1.1.1.tar.gz", hash = "sha256:d484c3090ba2889ae2928419117447a14daf3c1231d5e30d0aae34f354f01785"},
 ]
+"fasteners 0.17.3" = [
+    {url = "https://files.pythonhosted.org/packages/bd/f4/148f44998c1bdb064a508e7cbcf9e50b34572b3d36fcc378a5d61b7dc8c5/fasteners-0.17.3.tar.gz", hash = "sha256:a9a42a208573d4074c77d041447336cf4e3c1389a256fd3e113ef59cf29b7980"},
+    {url = "https://files.pythonhosted.org/packages/f6/01/274da83334c20dc1ae7a48b1ea4ae50d3571d4e6aea65bb0368f841701ad/fasteners-0.17.3-py3-none-any.whl", hash = "sha256:cae0772df265923e71435cc5057840138f4e8b6302f888a567d06ed8e1cbca03"},
+]
 "greenlet 2.0.2" = [
     {url = "https://files.pythonhosted.org/packages/07/ef/6bfa2ea34f76dea02833d66d28ae7cf4729ddab74ee93ee069c7f1d47c4f/greenlet-2.0.2-cp37-cp37m-macosx_10_15_x86_64.whl", hash = "sha256:d5508f0b173e6aa47273bdc0a0b5ba055b59662ba7c7ee5119528f466585526b"},
     {url = "https://files.pythonhosted.org/packages/08/b1/0615df6393464d6819040124eb7bdff6b682f206a464b4537964819dcab4/greenlet-2.0.2-cp36-cp36m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2dd11f291565a81d71dab10b7033395b7a3a5456e637cf997a6f33ebdf06f8db"},
@@ -637,6 +685,10 @@ content_hash = "sha256:dabf0a6deb6e9261238a62d1733e513c25adc2bfcf9bc474c6e05c631
 "httpx 0.24.0" = [
     {url = "https://files.pythonhosted.org/packages/4e/c1/692013f1e6115a061a14f6c7d05947515a1eb7b85ef6e9bf0ffbf0e92738/httpx-0.24.0-py3-none-any.whl", hash = "sha256:447556b50c1921c351ea54b4fe79d91b724ed2b027462ab9a329465d147d5a4e"},
     {url = "https://files.pythonhosted.org/packages/ae/23/f7beaf11a8b95fc173b8979c4bfd23ea7711c5ebd458d657d24a59df7e9f/httpx-0.24.0.tar.gz", hash = "sha256:507d676fc3e26110d41df7d35ebd8b3b8585052450f4097401c9be59d928c63e"},
+]
+"httpx-cache 0.9.0" = [
+    {url = "https://files.pythonhosted.org/packages/6b/8f/b7db1a3faca267d04ed8ccec8b64a56ac2bc5c9a1dae41752f5c6364f12f/httpx_cache-0.9.0.tar.gz", hash = "sha256:0208eab4ee97ba94e785b3f5a41b45cb8a363152c2074a065fa210fbf59b2dff"},
+    {url = "https://files.pythonhosted.org/packages/81/3e/66a288e82f2684e95d577bdd3094b506676794c006dc3898c7b63bf34da0/httpx_cache-0.9.0-py3-none-any.whl", hash = "sha256:37b7398a8be70d0a2bbe665e7fa0eeab3f3ff7777a8614c5ca7b521e613fc780"},
 ]
 "idna 3.4" = [
     {url = "https://files.pythonhosted.org/packages/8b/e1/43beb3d38dba6cb420cefa297822eac205a277ab43e5ba5d5c46faf96438/idna-3.4.tar.gz", hash = "sha256:814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4"},
