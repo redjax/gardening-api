@@ -22,13 +22,6 @@ class TrefleAPISettings(APISettingsBase):
         env_file = f"{THIS_DIR}/env_files/.env"
 
 
-# class PokeApiSettings(BaseSettings):
-#     BASE_URL: str = Field(default=None, env="BASE_URL")
-
-#     class Config:
-#         env_file = f"{THIS_DIR}/env_files/.env"
-
-
 # class AppSettings(BaseSettings):
 #     APP_TITLE: str = Field(default="Default App Title", env="APP_TITLE")
 #     APP_DESCRIPTION: str = Field(
